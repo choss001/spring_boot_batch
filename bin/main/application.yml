@@ -22,10 +22,26 @@ spring:
       ddl-auto: update #none 테이블을 자동으로 생성하지 않습니다.
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #대소문자 입력한 그대로 ddl
+  data:
+    mongodb:
+      host: 192.168.1.235
+      port: 27017
+      authentication-database: admin
+      database: telecomService
+      username: admin
+      password: dbfrhrfh1rk!
+      repositories:
+        type: auto
+#  batch:
+#    initialize-schema: ALWAYS
   batch:
-    initialize-schema: ALWAYS
+    job:
+      names: ${job.name:NONE}
 
 logging:
   level:
     org.springframework.web.client: DEBUG
     org.hibernate.type : trace
+    org:
+      springframework:
+        batch: DEBUG

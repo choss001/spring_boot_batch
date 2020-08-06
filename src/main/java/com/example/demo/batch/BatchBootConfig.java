@@ -4,13 +4,17 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Configuration
 public class BatchBootConfig {
 
@@ -23,15 +27,21 @@ public class BatchBootConfig {
     @Bean
     public Job processJob() {
         return jobBuilderFactory.get("processJob")
-                .incrementer(new RunIdIncrementer()).listener(listener())
-                .flow(orderStep1()).end().build();
-    }
+                .start(orderStep1(null))
+                .build();
+                    }
 
     @Bean
-    public Step orderStep1() {
-        return stepBuilderFactory.get("orderStep1").<String, String> chunk(1)
-                .reader(new Reader()).processor(new Processor())
-                .writer(new Writer()).build();
+    @JobScope
+    public Step orderStep1(@Value("#{jobParameters[requestDate]}") String requestDate) {
+        return stepBuilderFactory.get("orderStep1")
+                .tasklet((contribution, chunkContext) -> {
+                  log.info("this is Step1");
+                  log.info(">>>>>>> requestDate = {} ",requestDate);
+                  log.info(">>>>>>> requestDate =",requestDate);
+                  return RepeatStatus.FINISHED;
+                })
+                .build();
     }
 
     @Bean

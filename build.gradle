@@ -18,6 +18,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //jpa를 springboot에서 쉽게 다루기 위한 dependency
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.3.0.RELEASE'
 	runtimeOnly 'mysql:mysql-connector-java'
     compileOnly 'org.projectlombok:lombok:1.16.6'
     implementation 'org.springframework.boot:spring-boot-devtools'
