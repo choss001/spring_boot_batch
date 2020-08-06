@@ -12,14 +12,14 @@ spring:
     #MySQL : org.hibernate.dialect.MySQL5lnnoDBDialect
     properties:
       hibernate:
-       ddl-auto: update #DDL : CRATE, DROP, ALTER, TRUNCATE     #DML : SELECT, INSERT, UPATE, DELETE  #서버 시작 지점에 DDL문을 생성하여 DB에 적용한다.
+#       ddl-auto: update #DDL : CRATE, DROP, ALTER, TRUNCATE     #DML : SELECT, INSERT, UPATE, DELETE  #서버 시작 지점에 DDL문을 생성하여 DB에 적용한다.
        show_sql: true
        format_sql: true
        ddl_sql: true
     generate-ddl: false 
     show-sql: true #hibernate sql 문 보여주는 옵션
     hibernate:
-#      ddl-auto: update #none 테이블을 자동으로 생성하지 않습니다.
+      ddl-auto: update #none 테이블을 자동으로 생성하지 않습니다.
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #대소문자 입력한 그대로 ddl
   batch:

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.batch;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;

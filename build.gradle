@@ -20,8 +20,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
 	runtimeOnly 'mysql:mysql-connector-java'
     compileOnly 'org.projectlombok:lombok:1.16.6'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springframework.boot:spring-boot-devtools'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
