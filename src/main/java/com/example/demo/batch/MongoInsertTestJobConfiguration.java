@@ -10,6 +10,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.MongoItemReader;
+import org.springframework.batch.item.data.MongoItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
@@ -56,23 +57,34 @@ public class MongoInsertTestJobConfiguration {
     sort.put("status", Sort.Direction.ASC);
     mongoItemReader.setSort(sort);
     mongoItemReader.setTargetType(SmartChoiceEntity.class);
-      
-    try {
-      
-      log.info(">>>>>>>>>>>>>>>>mongoItemReader = {}", mongoItemReader.read().toString());
-    }catch(Exception Exce) {
-      
-    }
+    
     return mongoItemReader;
   }
+  
+//  @Bean
+//  public ItemProcessor<SmartChoiceEntity, SmartChoiceEntity> mongoItemProcessor(){
+//    SmartChoiceEntity smartChoiceEntity = new SmartChoiceEntity();
+//    smartChoiceEntity.setNum(1000);
+//    smartChoiceEntity.setImage("/smc/resources/upload/2018/7/3/SM-G925.jpg");
+//    smartChoiceEntity.setDevice_nm("갤럭시 S6엣지 (32GB) ");
+//    smartChoiceEntity.setDevice_info("제조사 : 삼성전자  |  모델명 : SM-G925  |  출시일 : 2015년 04월");
+//    smartChoiceEntity.setHigh_price("161,100원");
+//    smartChoiceEntity.setMiddle_price("132,100원");
+//    smartChoiceEntity.setRow_price("103,100원");
+//    for(int i = 1; i <= 10000000; i++) {
+//      
+//    }
+//    smartChoiceEntity.setId()
+//
+//    
+//  }
   
   
   @Bean 
   public ItemWriter<SmartChoiceEntity> mongoItemWriter(){
-    return list -> {
-      for (SmartChoiceEntity temp: list) {
-        log.info("Write Curren SmartChoise = {}", temp);
-      }
-    };
+    MongoItemWriter<SmartChoiceEntity> mongoItemWriter = new MongoItemWriter<>();
+    mongoItemWriter.setTemplate(mongoTemplate);
+    mongoItemWriter.setCollection("batchTest");
+    return mongoItemWriter;
   }
 }
