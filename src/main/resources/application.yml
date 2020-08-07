@@ -19,7 +19,7 @@ spring:
     generate-ddl: false 
     show-sql: true #hibernate sql 문 보여주는 옵션
     hibernate:
-      ddl-auto: update #none 테이블을 자동으로 생성하지 않습니다.
+      ddl-auto: create #none 테이블을 자동으로 생성하지 않습니다.
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #대소문자 입력한 그대로 ddl
   data:
@@ -32,9 +32,9 @@ spring:
       password: dbfrhrfh1rk!
       repositories:
         type: auto
-#  batch:
-#    initialize-schema: ALWAYS
   batch:
+    initialize-schema: ALWAYS
+#  batch:
     job:
       names: ${job.name:NONE}
 
